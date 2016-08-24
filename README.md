@@ -1,10 +1,11 @@
 # TouchSlider
 移动端touch焦点图插件，无任何依赖，轻量级，简单易用易改
 
-在线演示地址：http://linshi.mbwxzx.com/zt/TouchSlider/demo.html
+在线演示地址（无缝）：http://linshi.mbwxzx.com/zt/TouchSlider/demo.html
 
-在线演示地址：http://linshi.mbwxzx.com/zt/TouchSlider/demo3.html
+在线演示地址（有边界）：http://linshi.mbwxzx.com/zt/TouchSlider/demo2.html
 
+在线演示地址（full page）：http://linshi.mbwxzx.com/zt/TouchSlider/demo2.html
 # 配置项
 var b = new aaa({
 
