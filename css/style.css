@@ -1,0 +1,54 @@
+@charset 'utf-8';
+*{margin:0;padding:0;}
+html,body{
+	height:100%;
+	overflow:hidden;
+	position:relative;
+	width: 100%;
+}
+.viewport{
+	display: box;
+	display: -webkit-box;
+	height:100%;
+	-webkit-transform:translate3d(0,0,0);
+	backface-visibility:hidden;/*当元素不面向屏幕时是否可见*/
+	-webkit-backface-visibility:hidden;
+	position:relative;
+}
+.pageview{
+	-webkit-box-flex:1;
+}
+.pagenumber{
+	display:-webkit-box;
+	position:absolute;
+	bottom:2rem;
+	left:50%;
+	width: 30%;
+	margin-left:-15%;
+}
+.pagenumber div{
+	-webkit-box-flex:1;
+	width:0;
+	position:relative;
+}
+.pagenumber .now:after{
+	background:#fff;!important;
+}
+.pagenumber div:after{
+	content:'';
+	width:0.6rem;
+	height:0.6rem;
+	background:rgba(255,255,255,0.5);
+	border-radius:50%;
+	position: absolute;
+	top: 50%;left:50%;
+	margin:-0.3rem 0 0 -0.3rem;
+}
+h3{
+	text-align: center;
+	font-family:microsoft yahei;
+	color:#fff;
+	font-size:1.7rem;
+	font-weight:normal;
+	padding: 1rem 0;
+}
