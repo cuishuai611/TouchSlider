@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" charset="utf-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=1.0">
+	<title>touch</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id='viewport' class="viewport">
+    	<div class="pageview" style="background: #3b76c0" >
+	        <h3>页面-1</h3>
+	    </div>
+	    <div class="pageview" style="background: #58c03b;">
+	        <h3>页面-2</h3>
+	    </div>
+	    <div class="pageview" style="background: #c03b25;">
+	        <h3>页面-3</h3>
+	    </div>
+	    <div class="pageview" style="background: #e0a718;">
+	        <h3>页面-4</h3>
+	    </div>
+	    <div class="pageview" style="background: #c03eac;">
+	        <h3>页面-5</h3>
+	    </div>
+    </div>
+	<div class='pagenumber'>
+		 
+	</div>
+</body>
+<script>
+	(function(){
+		var vw = document.getElementById('viewport'),
+	        pg = document.querySelectorAll('.pageview'),
+	        bd = document.querySelector('.pagenumber'),
+	        n  = pg.length,  //number
+	        d  = '',         
+	        curpos = 0,		 //当前页面位置0
+	        pageNow = 0;     //当前页码
+	    vw.style.width = n*100+'%';
+
+	    for(var i=0; i<n; i++){        //创建view按钮
+            d = document.createElement('div');
+            bd.appendChild(d);
+	    }
+        var cc = bd.children;
+
+        var silApp = {
+            init:function(){
+            	document.addEventListener('DOMContentLoaded',function(){    //加载完成自动执行
+            		silApp.bindTouchEvent();
+            		silApp.setPageNow();
+            	}.bind(silApp),false);
+            }(),
+
+            transfrom:function(translate){
+                this.style.webkitTransform = "translate3d("+translate+"px,0,0)";
+                curpos = translate;
+            },
+
+            setPageNow:function(){
+                for(var j=0; j<cc.length; j++){
+                	cc[j].className = '';
+                }
+                cc[pageNow].className = 'now';
+            },
+
+            bindTouchEvent:function(){
+            	var pageWidth = window.innerWidth,  //页面（设备）宽度
+                    maxWidth = -pageWidth*(n-1),    //页面滑到到最后一页的位置
+                    startX,
+                    startY,
+                    startT,             //记录手机按下屏幕的时间
+                    initialPos = 0,     //手指按下的屏幕位置
+                    iMove = false,      //是否发生左右滑动
+                    Mdistance = 0,      //手指滑动的距离
+                    Direction = 'left'; //滑动的方向
+                
+                document.addEventListener('touchstart',function(e){
+                	e.preventDefault();
+                	var touch = e.touches[0];
+                	startX = touch.pageX;            //初始值 触点距文档的X轴值
+                	startY = touch.pageY;            //初始值 触点距文档的Y轴值
+                    initialPos = curpos;             //本次滑动的初始位置
+                    vw.style.webkitTransition = '';  //取消动画效果
+                    startT = new Date().getTime();   //记录按下的时间
+                    isMove = false;
+                }.bind(this),false);
+
+                document.addEventListener('touchmove',function(e){
+                	e.preventDefault();
+                	var touch = e.touches[0];
+                	var deltaX = touch.pageX - startX, deltaY = touch.pageY - startY;
+                	if(Math.abs(deltaX) > Math.abs(deltaY)){             //如果X轴的位移大于Y轴位移，则为左右滑动
+                        Mdistance = deltaX;                              //移动的距离
+                        var translate = initialPos + deltaX;             //当前需要移动到的位置
+                        if(translate <= 0 && translate >= maxWidth){     //判断是否超出边界
+                           this.transfrom.call(vw,translate);
+                           isMove = true;
+                        }
+                        Direction = deltaX > 0 ? 'right' : 'left';       //判断左右方向
+                	}
+                }.bind(this),false);
+
+                document.addEventListener('touchend',function(e){
+                	e.preventDefault();
+                	var translate = 0;
+                	var deltaT = new Date().getTime() - startT;          //计算手指停留时间
+                    if(isMove){
+                    	vw.style.webkitTransition = '0.3s ease -webkit-transform';
+                    	if(deltaT < 300){   //如果停留时间小于300毫秒，则为快速滑动，无论滑动距离是多少，都停留到下一页
+                            translate = Direction == 'left' ? curpos - (pageWidth + Mdistance) : curpos + pageWidth - Mdistance;
+                            translate = translate > 0 ? 0 : translate;   //左边界
+                            translate = translate < maxWidth ? maxWidth : translate;//右边界
+                    	}else{
+                    		if(Math.abs(Mdistance)/pageWidth < 0.5){     //如果滑动距离小于屏幕的50%，则退回到上一页，否则滑动到下一页
+                    			translate = curpos - Mdistance;
+                    		}else{
+                    			translate = Direction == 'left' ? curpos - (pageWidth + Mdistance) : curpos + pageWidth - Mdistance;
+                    			translate = translate > 0 ? 0 : translate;
+                    			translate = translate < maxWidth ? maxWidth : translate;
+                    		}
+                    	}
+                    	this.transfrom.call(vw,translate);  //执行滑动，让页面完整的显示到屏幕
+                    	pageNow = Math.round(Math.abs(translate) / pageWidth);
+                    	setTimeout(function(){
+                    	    this.setPageNow();//设置页码，DOM操作需要放到子线程中，否则会出现卡顿
+                    	}.bind(this),100);
+                    }
+                }.bind(this),false);
+            }
+        };
+	})();
+
+    
+</script>
+</html>
