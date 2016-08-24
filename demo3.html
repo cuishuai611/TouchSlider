@@ -124,7 +124,7 @@
                     	this.transfrom.call(vw,translate);  //执行滑动，让页面完整的显示到屏幕
                     	pageNow = Math.round(Math.abs(translate) / pageWidth);
                     	setTimeout(function(){
-                    	    this.setPageNow();//设置页码，DOM操作需要放到子线程中，否则会出现卡顿
+                    	    this.setPageNow();              //设置页码，DOM操作需要放到子线程中，否则会出现卡顿
                     	}.bind(this),100);
                     }
                 }.bind(this),false);
