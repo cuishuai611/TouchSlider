@@ -30,7 +30,7 @@
             t2 = null,
             timer = data.timer,
             speed = data.speed,
-            pageWidth = window.innerWidth,   //页面（设备）宽度
+            pageWidth = vw.offsetWidth,   //页面（设备）宽度
             mbdir = -pageWidth,              //需要移动到的位置
 	        pageNow = 0,                     //当前页码
 	        FirImg = pg[0].cloneNode(true),
@@ -56,7 +56,7 @@
             	document.addEventListener('DOMContentLoaded',function(){
             		silApp.bindTouchEvent();
             		silApp.setPageNow();
-                    t = setInterval(silApp.autoMove,speed);
+                    // t = setInterval(silApp.autoMove,speed);
             	}.bind(silApp),false);
             }(),
 
@@ -173,7 +173,12 @@
         pageview : '.pageview',
         pagenumber : '.pagenumber',
         speed : 2500,
-        timer : 300  //该值与动画执行时间相等
+        timer : 300   //该值与动画执行时间相等
     });
+
+    // var navigator = function(){
+    //     var ua = navigator.userAgent;
+    //     document.write(navigator);
+    // }();
 </script>
 </html>
