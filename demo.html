@@ -30,12 +30,20 @@
             t2 = null,
             timer = data.timer,
             speed = data.speed,
-            pageWidth = vw.offsetWidth,   //页面（设备）宽度
+            pageWidth = vw.parentNode.offsetWidth,      //页面（设备）宽度
             mbdir = -pageWidth,              //需要移动到的位置
 	        pageNow = 0,                     //当前页码
 	        FirImg = pg[0].cloneNode(true),
             LasImg = pg[n-1].cloneNode(true),
             maxWidth = -pageWidth*(n+1);     //页面滑到最后一页的位置
+	    
+	    window.onresize = function(){        //修复横屏bug
+	    	pageWidth = vw.parentNode.offsetWidth;
+	    	mbdir = -pageWidth*(pageNow+1);
+	    	maxWidth = -pageWidth*(n+1);
+	    	silApp.setPageNow();
+	    	silApp.transfrom.call(vw,mbdir);	
+	    } 
     
         var silApp = {
             recons:function(){
@@ -56,7 +64,7 @@
             	document.addEventListener('DOMContentLoaded',function(){
             		silApp.bindTouchEvent();
             		silApp.setPageNow();
-                    // t = setInterval(silApp.autoMove,speed);
+                    t = setInterval(silApp.autoMove,speed);
             	}.bind(silApp),false);
             }(),
 
