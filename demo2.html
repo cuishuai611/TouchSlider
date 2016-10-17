@@ -27,7 +27,7 @@
 	        d  = '',  
             t  = null,                       //自动切换
             speed = 2500,
-            pageWidth = vw.offsetWidth,   //页面（设备）宽度
+            pageWidth = vw.parentNode.offsetWidth,   //页面（设备）宽度
             mbdir = '',                      //需要移动到的位置
 	        curpos = 0,		                 //当前页面位置0
 	        pageNow = 0;                     //当前页码
@@ -38,6 +38,14 @@
             bd.appendChild(d);
 	    }
         var cc = bd.children;
+
+        window.onresize = function(){        //修复横屏bug
+            pageWidth = vw.parentNode.offsetWidth;
+            mbdir = -pageWidth*(pageNow+1);
+            maxWidth = -pageWidth*(n+1);
+            silApp.setPageNow();
+            silApp.transfrom.call(vw,mbdir);    
+        }
 
         var silApp = {       
             init:function(){
