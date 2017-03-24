@@ -5,18 +5,20 @@
 
 在线演示地址（有边界）：http://linshi.mbwxzx.com/zt/TouchSlider/demo2.html
 
-在线演示地址（full page）：http://linshi.mbwxzx.com/zt/TouchSlider/demo2.html
+在线演示地址（full page）：http://linshi.mbwxzx.com/zt/TouchSlider/demo3.html
+
+
 # 配置项
-var b = new aaa({
+TouchSlider({
 
-        view : 'viewport',            //外层容器id
+    view : 'viewport',            //外层容器id
 
-        pageview : '.pageview',       //图片容器class
+    pageview : '.pageview',       //图片容器class
 
-        pagenumber : '.pagenumber',   //按钮容器class
+    pagenumber : '.pagenumber',   //按钮容器class
 
-        speed : 2500,                 //自动切换的间隔时间（如不需要自动切换可自行注释autoMove）
+    speed : 2500,                 //自动切换的间隔时间（如不需要自动切换可自行注释autoMove）
 
-        timer : 300                   //该值与动画执行时间相等
+    timer : 300                   //该值与动画执行时间相等
 
-    });
+});

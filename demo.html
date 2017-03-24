@@ -20,7 +20,7 @@
 </body>
 <script>
 
-    function aaa(data){
+    function TouchSlider(data){
         var vw = document.getElementById(data.view),
 	        pg = document.querySelectorAll(data.pageview),
 	        bd = document.querySelector(data.pagenumber),
@@ -176,17 +176,12 @@
         };
     }
 
-    var b = new aaa({
+    TouchSlider({
         view : 'viewport',
         pageview : '.pageview',
         pagenumber : '.pagenumber',
         speed : 2500,
         timer : 300   //该值与动画执行时间相等
     });
-
-    // var navigator = function(){
-    //     var ua = navigator.userAgent;
-    //     document.write(navigator);
-    // }();
 </script>
 </html>
