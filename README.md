@@ -1,11 +1,11 @@
 # TouchSlider
 移动端touch焦点图插件，无任何依赖，轻量级，简单易用易改
 
-在线演示地址（无缝）：http://cs.usmouse.com/git/TouchSlider/demo.html
+在线演示地址（无缝）：http://www.0317news.cn/git/TouchSlider/demo.html
 
-在线演示地址（有边界）：http://cs.usmouse.com/git/TouchSlider/demo2.html
+在线演示地址（有边界）：http://www.0317news.cn/git/TouchSlider/demo2.html
 
-在线演示地址（full page）：http://cs.usmouse.com/git/TouchSlider/demo3.html
+在线演示地址（full page）：http://www.0317news.cn/git/TouchSlider/demo3.html
 
 
 # 配置项
