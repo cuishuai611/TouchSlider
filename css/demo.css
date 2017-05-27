@@ -8,7 +8,7 @@ html,body{
 ul,li{list-style:none;position:relative;}
 .clear{content:'';clear:both;display:block;height:0;visibility:hidden;}
 
-.slider{position:relative;}
+.slider{position:relative;overflow:hidden;}
 .viewport{
 	display:-webkit-flex;display:-webkit-box;display: flex;
 	height:100%;
